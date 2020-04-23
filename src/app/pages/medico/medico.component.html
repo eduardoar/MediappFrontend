@@ -1,0 +1,56 @@
+<mat-toolbar>Médicos</mat-toolbar>
+
+<div class="example-container mat-elevation-z8">
+
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="filtrar($event.target.value)" placeholder="Buscar médico">
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="idmedico">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> IDMEDICO </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.idMedico}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="nombres">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.nombres}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="apellidos">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.apellidos}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cmp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> CMP </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.cmp}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+      <mat-cell *matCellDef="let row">        
+        <button mat-button color="primary" (click)="abrirDialogo(row)" ><mat-icon>ballot</mat-icon></button>
+        <button mat-button color="accent" (click)="eliminar(row)"><mat-icon>delete</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+<br>
+
+<button mat-fab color="accent" (click)="abrirDialogo()" style="float: right; margin-right: 20px">
+  <mat-icon>create</mat-icon>
+</button>
