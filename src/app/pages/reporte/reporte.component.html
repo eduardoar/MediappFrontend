@@ -1,0 +1,27 @@
+<mat-toolbar>Reporte de consultas</mat-toolbar>
+
+<button mat-button color="primary" (click)="cambiar('line')">Lineal</button>
+<button mat-button color="primary" (click)="cambiar('bar')">Barras</button>
+<button mat-button color="primary" (click)="cambiar('doughnut')">Rosquilla</button>
+<button mat-button color="primary" (click)="cambiar('radar')">Radar</button>
+<button mat-button color="primary" (click)="cambiar('pie')">Pie</button>
+
+<div [hidden]="!chart">
+    <canvas id="canvas">{{ chart }}</canvas>
+</div>
+
+<button mat-button color="primary" (click)="generarReporte()">PDF</button>
+<button mat-button color="primary" (click)="descargarReporte()">Descargar PDF</button>
+
+<pdf-viewer [src]="pdfSrc" [render-text]="true" style="display: block;"></pdf-viewer>
+
+<button mat-button color="primary" onclick="document.getElementById('flArchivo').click()">Seleccionar</button>
+<input id="flArchivo" type="file" style="display: none" (change)="seleccionarArchivo($event)" >
+<p>{{nombreArchivo}}</p>
+
+<button mat-button color="primary" (click)="subirArchivo()" [disabled]="!archivosSeleccionados">Subir Archivo</button>
+
+<button mat-button color="primary" (click)="accionImagen('M')" >Mostrar</button>
+<button mat-button color="primary" (click)="accionImagen('O')" >Ocultar</button>
+
+<img mat-card-image [src]="imagenData" *ngIf="imagenEstado">

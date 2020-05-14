@@ -19,6 +19,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -41,7 +47,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatStepperModule,
+    MatSlideToggleModule,
+    MatGridListModule,
+    MatProgressBarModule
   ],
   exports: [
     MatSidenavModule,
@@ -62,10 +72,15 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatStepperModule,
+    MatSlideToggleModule,
+    MatGridListModule,
+    MatProgressBarModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'es-ES'}
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntl},
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
   ]
 })
 export class MaterialModule { }

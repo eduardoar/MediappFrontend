@@ -5,6 +5,7 @@ import { Paciente } from 'src/app/_model/Paciente';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-paciente',
@@ -13,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PacienteComponent implements OnInit {
 
+  cantidad: number = 0;
   displayedColumns = ['idPaciente', 'nombres', 'apellidos', 'acciones'];
   dataSource: MatTableDataSource<Paciente>;
   @ViewChild(MatSort, {static : true}) sort: MatSort;
@@ -34,11 +36,18 @@ export class PacienteComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
 
-    this.pacienteService.listar().subscribe(data => {
+    this.pacienteService.listarPageable(0,10).subscribe(data => {
+      this.dataSource = new MatTableDataSource(data.content);
+      this.dataSource.sort = this.sort;
+      //this.dataSource.paginator = this.paginator;
+      this.cantidad = data.totalElements;
+    });
+
+    /*this.pacienteService.listar().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-    });
+    });*/
   }
 
   filtrar(valor : any){
@@ -52,6 +61,14 @@ export class PacienteComponent implements OnInit {
         this.pacienteService.mensajeCambio.next('SE ELIMINO');
       })
     });
+  }
+
+  mostrarMas(e: any){
+    this.pacienteService.listarPageable(e.pageIndex, e. pageSize).subscribe(data => {
+      this.dataSource = new MatTableDataSource(data.content);
+      this.dataSource.sort = this.sort;
+      this.cantidad = data.totalElements;
+    }); 
   }
 
 }

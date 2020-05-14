@@ -1,0 +1,18 @@
+.medicoCSS {
+    background: darkblue;
+    color: white;
+  }
+  
+  .consultorioCSS {
+    background: darkblue;
+    color: white;
+  }
+  
+  #consultorio {
+    height: 100%;
+    width: 100%;
+    background-color: #555;
+    color: white;
+    text-align: center;
+  }
+  

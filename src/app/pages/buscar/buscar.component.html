@@ -1,0 +1,56 @@
+<mat-toolbar>Búsqueda de Consulta</mat-toolbar>
+<form [formGroup]="form" (ngSubmit)="buscar()">
+
+    <mat-form-field>
+        <input matInput placeholder="DNI" formControlName="dni">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Nombre Completo" formControlName="nombreCompleto">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" [max]="maxFecha" placeholder="Escoge una fecha"
+            formControlName="fechaConsulta">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Buscar</button>
+
+    <mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="paciente">
+            <mat-header-cell *matHeaderCellDef> Paciente </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.paciente.nombres | lowercase }} {{element.paciente.apellidos | lowercase}}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="medico">
+            <mat-header-cell *matHeaderCellDef> Medico </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.medico.nombres }}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="especialidad">
+            <mat-header-cell *matHeaderCellDef> Especialidad </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.especialidad.nombre}}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="fecha">
+            <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.fecha | date:'dd-MM-yyyy hh:mm:ss a'}}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="acciones">
+            <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button type="button" mat-raised-button color="primary" (click)="verDetalle(element)">Ver Detalle</button>
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+</form>

@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  HOST: 'http://localhost:8080'
+  HOST: 'http://localhost:8080',
+  TOKEN_AUTH_USERNAME: 'mediapp',
+  TOKEN_AUTH_PASSWORD: 'edu23codex',
+  TOKEN_NAME: 'access_token',
+  REINTENTOS:3
 };
 
 /*
